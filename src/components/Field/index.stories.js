@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Field } from "./Field";
-import { fieldMock } from "./field.mock";
+import { number } from "@storybook/addon-knobs";
 
 export default {
   title: "FieldStory",
@@ -8,9 +8,29 @@ export default {
 };
 
 export const FieldStory = () => {
+  const options = {
+    range: true,
+    min: 1,
+    max: 200,
+    step: 1,
+  };
+
+  const x = number("X", 10, options);
+  const y = number("Y", 10, options);
+
+  useEffect(() => {
+    const handleContextmenu = (e) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextmenu);
+    return function cleanup() {
+      document.removeEventListener("contextmenu", handleContextmenu);
+    };
+  }, []);
+
   return (
     <div>
-      <Field cells={fieldMock} />
+      <Field fieldSize={{ x: x, y: y }} />
     </div>
   );
 };

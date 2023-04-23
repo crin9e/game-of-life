@@ -1,0 +1,21 @@
+.loginFormWrapper {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.nameInput {
+    margin-bottom: 20px;
+}
+
+.startButton {
+    width: 120px;
+    align-self: center;
+}
