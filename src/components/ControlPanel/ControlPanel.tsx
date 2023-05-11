@@ -18,6 +18,12 @@ export const ControlPanel: React.FC = () => {
     }
   };
 
+  const handleReset = (e: React.MouseEvent<HTMLElement>) => {
+    setFieldSize({ x: 50, y: 50 });
+    setPopulation(0);
+    setSpeed(50);
+  };
+
   return (
     <div className={styles.controlPanelContainer}>
       <div className={styles.row}>
@@ -102,7 +108,7 @@ export const ControlPanel: React.FC = () => {
       <div>
         <button>Начать</button>
         <button>Остановить</button>
-        <button>Сбросить</button>
+        <button onClick={handleReset}>Сбросить</button>
       </div>
     </div>
   );

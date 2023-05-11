@@ -17,6 +17,12 @@ export const FieldStory = () => {
 
   const x = number("X", 10, options);
   const y = number("Y", 10, options);
+  const population = number("POPULATION", 0, {
+    range: true,
+    min: 0,
+    max: 100,
+    step: 1,
+  });
 
   useEffect(() => {
     const handleContextmenu = (e) => {
@@ -30,7 +36,7 @@ export const FieldStory = () => {
 
   return (
     <div>
-      <Field fieldSize={{ x: x, y: y }} />
+      <Field fieldSize={{ x: x, y: y }} initialPopulation={population} />
     </div>
   );
 };

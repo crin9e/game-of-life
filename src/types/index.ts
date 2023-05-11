@@ -18,5 +18,6 @@ export type FieldTypes = {
     x: number;
     y: number;
   };
+  initialPopulation: number;
   // cells: CellTypes[];
 };

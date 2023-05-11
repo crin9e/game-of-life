@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { CellTypes } from "../../types";
 import styles from "./Cell.module.css";
@@ -30,6 +30,10 @@ export const Cell: React.FunctionComponent<CellTypes> = ({ status, x, y }) => {
       }
     }
   };
+
+  useEffect(() => {
+    setCellStatus(status);
+  }, [status]);
 
   return (
     <div
