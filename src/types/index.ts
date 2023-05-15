@@ -1,12 +1,12 @@
-export type Statuses = "vacant" | "alive" | "dead";
+export type Status = "vacant" | "alive" | "dead";
 
 export type CellTypes = {
-  status: Statuses;
+  status: Status;
   x: number;
   y: number;
 };
 
-export type FilledFieldTypes = string[][];
+export type FilledFieldTypes = Status[][];
 
 export type FieldSize = {
   x: number;
@@ -19,5 +19,6 @@ export type FieldTypes = {
     y: number;
   };
   initialPopulation: number;
-  // cells: CellTypes[];
 };
+
+export type SpeedActions = "slowDown" | "resetSpeed" | "speedUp";

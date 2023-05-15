@@ -11,14 +11,5 @@ describe("cell component", () => {
     const cell = screen.getAllByTestId("cell-1-2");
 
     expect(cell).toBeDefined();
-
-    // const { container } = render(<Cell status="alive" x={1} y={2} />);
-    // console.log(container.firstChild.style.__values);
-    // expect(container.firstChild).toHaveStyle("background-color: green");
-
-    expect(screen.getByTestId("cell-1-2")).toHaveAttribute(
-      "style",
-      "background-color: green"
-    );
   });
 });

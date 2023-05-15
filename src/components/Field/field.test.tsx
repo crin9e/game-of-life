@@ -5,7 +5,7 @@ import { describe, expect } from "@jest/globals";
 
 describe("Field component", () => {
   it("should render a field", () => {
-    render(<Field fieldSize={{ x: 2, y: 5 }} />);
+    render(<Field fieldSize={{ x: 2, y: 5 }} initialPopulation={0} />);
 
     const field = screen.getAllByTestId("field");
 

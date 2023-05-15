@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import styles from "./ControlPanel.module.css";
-import { FieldSize } from "../../types";
+import { FieldSize, SpeedActions } from "../../types";
 
 export const ControlPanel: React.FC = () => {
   const [fieldSize, setFieldSize] = useState<FieldSize>({ x: 50, y: 50 });
   const [population, setPopulation] = useState<number>(50);
   const [speed, setSpeed] = useState<number>(50);
 
-  const handleSpeedChange = (e: React.MouseEvent<HTMLElement>) => {
-    if (e.target.name === "resetSpeed") setSpeed(50);
-    if (e.target.name === "speedUp") {
+  const handleSpeedChange = (action: SpeedActions) => {
+    if (action === "resetSpeed") setSpeed(50);
+    if (action === "speedUp") {
       if (speed < 100) setSpeed((prev) => prev + 25);
     }
-    if (e.target.name === "slowDown") {
+    if (action === "slowDown") {
       if (speed > 0) setSpeed((prev) => prev - 25);
     }
+    return null;
   };
 
   const handleReset = (e: React.MouseEvent<HTMLElement>) => {
@@ -94,15 +95,13 @@ export const ControlPanel: React.FC = () => {
       <div className={styles.row}>
         <span>Скорость:</span>
         <div>
-          <button name="slowDown" onClick={handleSpeedChange}>
+          <button onClick={() => handleSpeedChange("slowDown")}>
             Замедлить
           </button>
-          <button name="resetSpeed" onClick={handleSpeedChange}>
+          <button onClick={() => handleSpeedChange("resetSpeed")}>
             Сбросить
           </button>
-          <button name="speedUp" onClick={handleSpeedChange}>
-            Ускорить
-          </button>
+          <button onClick={() => handleSpeedChange("speedUp")}>Ускорить</button>
         </div>
       </div>
       <div>
