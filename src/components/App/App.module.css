@@ -1,0 +1,11 @@
+.root {
+    align-items: center;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 0.2rem;
+    cursor: pointer 
+}
+

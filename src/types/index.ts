@@ -1,8 +1,24 @@
+export type Status = "vacant" | "alive" | "dead";
+
 export type CellTypes = {
-  number: number;
-  color: string;
+  status: Status;
+  x: number;
+  y: number;
+};
+
+export type FilledFieldTypes = Status[][];
+
+export type FieldSize = {
+  x: number;
+  y: number;
 };
 
 export type FieldTypes = {
-  cells: CellTypes[];
+  fieldSize: {
+    x: number;
+    y: number;
+  };
+  initialPopulation: number;
 };
+
+export type SpeedActions = "slowDown" | "resetSpeed" | "speedUp";

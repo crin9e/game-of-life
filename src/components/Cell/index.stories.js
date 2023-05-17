@@ -1,29 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Cell } from "./Cell";
-import { cellMock } from "./cell.mock";
-import { number } from "@storybook/addon-knobs";
-import { color } from "@storybook/addon-knobs";
+import { select } from "@storybook/addon-knobs";
 
 export default {
   title: "CellStory",
   component: Cell,
 };
 
-export const CellStory = () => {
-  return (
-    <div>
-      <Cell {...cellMock} />
-    </div>
-  );
-};
-
 export const CellStoryWithKnobs = () => {
-  const numberValue = number("Number", 25);
-  const colorValue = color("Color", "#ffffff");
+  const options = ["vacant", "alive", "dead"];
+  const cellStatus = select("Status", options, "vacant");
+
+  useEffect(() => {
+    const handleContextmenu = (e) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextmenu);
+    return function cleanup() {
+      document.removeEventListener("contextmenu", handleContextmenu);
+    };
+  }, []);
 
   return (
     <div>
-      <Cell color={colorValue} number={numberValue} />
+      <Cell status={cellStatus} />
     </div>
   );
 };
