@@ -1,0 +1,21 @@
+.userPanel {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color:green;
+    height: 3rem;
+}
+
+.logoutButton {
+    height: 2rem;
+    margin: 0 1rem;
+    align-self: center;
+    background-color: white;
+}
+
+.greeting {
+    margin: 0 1rem;
+    align-self: center;
+    color: white;
+}

@@ -22,3 +22,5 @@ export type FieldTypes = {
 };
 
 export type SpeedActions = "slowDown" | "resetSpeed" | "speedUp";
+
+export type UserPanelTypes = { loggedInUser: string | null };
