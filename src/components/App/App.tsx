@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "../Router/Router";
 import styles from "./App.module.css";
 
 export const App = () => {
-  useEffect(() => {
-    const handleContextmenu = (e) => {
-      e.preventDefault();
-    };
-    document.addEventListener("contextmenu", handleContextmenu);
-    return function cleanup() {
-      document.removeEventListener("contextmenu", handleContextmenu);
-    };
-  }, []);
-
-  return <div className={styles.root}>o</div>;
+  return (
+    <BrowserRouter>
+      <div className={styles.root}>
+        <Router />
+      </div>
+    </BrowserRouter>
+  );
 };
