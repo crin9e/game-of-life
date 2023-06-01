@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { LoginForm } from "../LoginForm/LoginForm";
-import { Mainscreen } from "../Mainscreen/Mainscreen";
-import { NotFound } from "../NotFound/NotFound";
-import { CheckForLogin } from "../CheckForLogin/CheckForLogin";
+import { LoginForm } from "../Pages/LoginForm/LoginForm";
+import { Mainscreen } from "../Pages/Mainscreen/Mainscreen";
+import { NotFound } from "../Pages/NotFound/NotFound";
+import { CheckForLogin } from "../../utils/CheckForLogin/CheckForLogin";
 
 export const Router: React.FunctionComponent = () => {
   return (

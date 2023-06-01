@@ -1,10 +1,9 @@
 const path = require("path");
-
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpackRules = require("./webpackRules");
 
 module.exports = {
   entry: "./src/index.ts",
+  mode: "development",
   devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
@@ -16,9 +15,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "./index.js",
+    filename: "./bundle.js",
     publicPath: "/",
-    // https://github.com/GoogleChromeLabs/worker-plugin/issues/20
     globalObject: "(typeof self!='undefined'?self:global)",
   },
   module: {
@@ -31,7 +29,11 @@ module.exports = {
         test: /\.worker\.(ts|js)$/,
         use: { loader: "worker-loader" },
       },
-      ...webpackRules,
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        include: path.resolve(__dirname, "src"),
+        use: ["babel-loader"],
+      },
     ],
   },
   devServer: {
@@ -39,7 +41,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./public/index.html",
+      template: "public/index.html",
     }),
   ],
 };

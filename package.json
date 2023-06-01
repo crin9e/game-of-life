@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "dev": "webpack serve",
     "storybook": "start-storybook -s ./.storybook watch-css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-redux": "^7.1.25",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.1"
   },
   "devDependencies": {
