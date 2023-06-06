@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "../Router/Router";
 import { Provider } from "react-redux";
@@ -6,6 +6,16 @@ import { store } from "../Store/store";
 import styles from "./App.module.css";
 
 export const App = () => {
+  // useEffect(() => {
+  //   const handleContextmenu = (e) => {
+  //     e.preventDefault();
+  //   };
+  //   document.addEventListener("contextmenu", handleContextmenu);
+  //   return function cleanup() {
+  //     document.removeEventListener("contextmenu", handleContextmenu);
+  //   };
+  // }, []);
+
   return (
     <BrowserRouter>
       <Provider store={store}>
