@@ -11,7 +11,7 @@ export const LoginForm: React.FunctionComponent = () => {
 
   const login = () => {
     if (username.length > 0) {
-      localStorage.setItem("userName", username);
+      localStorage.setItem("userName", username.trim());
       navigate("/");
     }
   };

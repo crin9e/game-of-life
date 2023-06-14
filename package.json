@@ -5,14 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "cross-env NODE_ENV=development webpack serve",
     "storybook": "start-storybook -s ./.storybook watch-css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-redux": "^7.1.25",
+    "core-js": "^3.30.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.1"
   },
   "devDependencies": {
@@ -34,6 +40,7 @@
     "@typescript-eslint/parser": "^5.46.0",
     "babel-loader": "^9.1.2",
     "clsx": "^1.2.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^27.1.6",
@@ -45,6 +52,7 @@
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.5.0",
     "loki": "^0.31.0",
+    "mini-css-extract-plugin": "^2.7.6",
     "prettier": "^2.8.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
@@ -66,5 +74,17 @@
         "preset": "iPhone 7"
       }
     }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

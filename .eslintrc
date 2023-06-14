@@ -46,7 +46,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
-    "react/display-name": 0
+    "react/display-name": 0,
+    "import/prefer-default-export": "off"
   },
   "parserOptions": {
     "sourceType": "module",
@@ -69,7 +70,7 @@
       ],
       "rules": {
         "no-restricted-syntax": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
       }
     },
     {
