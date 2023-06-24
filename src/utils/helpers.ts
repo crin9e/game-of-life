@@ -30,3 +30,20 @@ export const shuffleArray = (array: string[]): string[] => {
   }
   return newArray;
 };
+
+export const checkNeighbours = (
+  array: FilledFieldTypes,
+  x: number,
+  y: number
+) => {
+  return [
+    array?.[x - 1]?.[y - 1],
+    array?.[x]?.[y - 1],
+    array?.[x + 1]?.[y - 1],
+    array?.[x - 1]?.[y],
+    array?.[x + 1]?.[y],
+    array?.[x - 1]?.[y + 1],
+    array?.[x]?.[y + 1],
+    array?.[x + 1]?.[y + 1],
+  ].filter((e) => e === "alive").length;
+};

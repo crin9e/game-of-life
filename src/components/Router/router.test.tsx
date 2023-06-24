@@ -3,13 +3,19 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect } from "@jest/globals";
 import { Router } from "./Router";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "../Store/store";
+import { UserPanel } from "../Pages/Mainscreen/Components/UserPanel/UserPanel";
+import { logOut } from "../Store/slices/LoginSlice";
 
 describe("Userpanel component", () => {
   it("should render login screen", () => {
-    localStorage.removeItem("userName");
+    localStorage.removeItem("reduxState");
     render(
       <BrowserRouter>
-        <Router />
+        <Provider store={store}>
+          <Router />
+        </Provider>
       </BrowserRouter>
     );
 
@@ -18,10 +24,14 @@ describe("Userpanel component", () => {
     expect(startButton).toBeDefined();
   });
   it("should log in and render a greeting screen", () => {
-    localStorage.removeItem("userName");
+    localStorage.removeItem("reduxState");
+    store.dispatch(logOut());
     render(
       <BrowserRouter>
-        <Router />
+        <Provider store={store}>
+          <UserPanel />
+          <Router />
+        </Provider>
       </BrowserRouter>
     );
     const input = screen.getByTestId("loginInput");
@@ -38,10 +48,14 @@ describe("Userpanel component", () => {
   });
 
   it("should log in and log out correctly", () => {
-    localStorage.removeItem("userName");
+    localStorage.removeItem("reduxState");
+    store.dispatch(logOut());
     render(
       <BrowserRouter>
-        <Router />
+        <Provider store={store}>
+          <UserPanel />
+          <Router />
+        </Provider>
       </BrowserRouter>
     );
     const input = screen.getByTestId("loginInput");

@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeFieldSize,
+  changePopulation,
+  changeSpeed,
+  reset,
+  toggleIsPlaying,
+} from "../../../../Store/slices/ContolPanelSlice";
 import clsx from "clsx";
 import styles from "./ControlPanel.module.css";
-import { FieldSize, SpeedActions } from "../../types";
+import { ControlPanelState } from "../../../../../types";
 
 export const ControlPanel: React.FC = () => {
-  const [fieldSize, setFieldSize] = useState<FieldSize>({ x: 50, y: 50 });
-  const [population, setPopulation] = useState<number>(50);
-  const [speed, setSpeed] = useState<number>(50);
+  const controlPanelState = useSelector(
+    (state: { ContolPanelSlice: ControlPanelState }) => state.ContolPanelSlice
+  );
 
-  const handleSpeedChange = (action: SpeedActions) => {
-    if (action === "resetSpeed") setSpeed(50);
-    if (action === "speedUp") {
-      if (speed < 100) setSpeed((prev) => prev + 25);
-    }
-    if (action === "slowDown") {
-      if (speed > 0) setSpeed((prev) => prev - 25);
-    }
-    return null;
-  };
+  const dispatch = useDispatch();
 
-  const handleReset = (e: React.MouseEvent<HTMLElement>) => {
-    setFieldSize({ x: 50, y: 50 });
-    setPopulation(0);
-    setSpeed(50);
+  const handleReset = () => {
+    dispatch(toggleIsPlaying(false));
+    dispatch(reset());
   };
 
   return (
@@ -37,15 +35,14 @@ export const ControlPanel: React.FC = () => {
               name="x-size"
               min="50"
               max="200"
-              value={fieldSize.x}
+              value={controlPanelState.fieldSize.x}
               onChange={(e) =>
-                setFieldSize((prev) => ({
-                  ...prev,
-                  x: parseInt(e.target.value),
-                }))
+                dispatch(
+                  changeFieldSize({ axis: "x", size: parseInt(e.target.value) })
+                )
               }
             />
-            <span>{fieldSize.x}</span>
+            <span>{controlPanelState.fieldSize.x}</span>
           </div>
         </div>
         <div className={styles.range}>
@@ -57,15 +54,14 @@ export const ControlPanel: React.FC = () => {
               name="y-size"
               min="50"
               max="200"
-              value={fieldSize.y}
+              value={controlPanelState.fieldSize.y}
               onChange={(e) =>
-                setFieldSize((prev) => ({
-                  ...prev,
-                  y: parseInt(e.target.value),
-                }))
+                dispatch(
+                  changeFieldSize({ axis: "y", size: parseInt(e.target.value) })
+                )
               }
             />
-            <span>{fieldSize.y}</span>
+            <span>{controlPanelState.fieldSize.y}</span>
           </div>
         </div>
       </div>
@@ -73,20 +69,26 @@ export const ControlPanel: React.FC = () => {
         <span>Начальный процент заполненности:</span>
         <div>
           <button
-            onClick={() => setPopulation(20)}
-            className={clsx({ [styles.selected]: population === 20 })}
+            onClick={() => dispatch(changePopulation(20))}
+            className={clsx({
+              [styles.selected]: controlPanelState.population === 20,
+            })}
           >
             20%
           </button>
           <button
-            onClick={() => setPopulation(50)}
-            className={clsx({ [styles.selected]: population === 50 })}
+            onClick={() => dispatch(changePopulation(50))}
+            className={clsx({
+              [styles.selected]: controlPanelState.population === 50,
+            })}
           >
             50%
           </button>
           <button
-            onClick={() => setPopulation(70)}
-            className={clsx({ [styles.selected]: population === 70 })}
+            onClick={() => dispatch(changePopulation(70))}
+            className={clsx({
+              [styles.selected]: controlPanelState.population === 70,
+            })}
           >
             70%
           </button>
@@ -95,18 +97,28 @@ export const ControlPanel: React.FC = () => {
       <div className={styles.row}>
         <span>Скорость:</span>
         <div>
-          <button onClick={() => handleSpeedChange("slowDown")}>
-            Замедлить
-          </button>
-          <button onClick={() => handleSpeedChange("resetSpeed")}>
+          <button onClick={() => dispatch(changeSpeed("down"))}>⏪</button>
+          <button onClick={() => dispatch(changeSpeed("reset"))}>
             Сбросить
           </button>
-          <button onClick={() => handleSpeedChange("speedUp")}>Ускорить</button>
+          <button onClick={() => dispatch(changeSpeed("up"))}>⏩</button>
         </div>
       </div>
       <div>
-        <button>Начать</button>
-        <button>Остановить</button>
+        <button
+          onClick={() => {
+            dispatch(toggleIsPlaying(true));
+          }}
+        >
+          ⏵
+        </button>
+        <button
+          onClick={() => {
+            dispatch(toggleIsPlaying(false));
+          }}
+        >
+          ⏸
+        </button>
         <button onClick={handleReset}>Сбросить</button>
       </div>
     </div>

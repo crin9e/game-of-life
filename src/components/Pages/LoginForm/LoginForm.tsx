@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./LoginForm.module.css";
+import { LoginState } from "../../../types";
+import { logIn } from "../../Store/slices/LoginSlice";
 
 export const LoginForm: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loggedInUser = localStorage.getItem("userName");
+  const loggedInUser = useSelector(
+    (state: { LoginSlice: LoginState }) => state.LoginSlice.username
+  );
 
   const login = () => {
     if (username.length > 0) {
-      localStorage.setItem("userName", username.trim());
+      dispatch(logIn(username.trim()));
       navigate("/");
     }
   };

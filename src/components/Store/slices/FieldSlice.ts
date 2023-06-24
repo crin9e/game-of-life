@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fillField } from "../../../utils/helpers";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { FieldState, FilledFieldTypes } from "../../../types";
 
-const initialState = {
-  fieldState: fillField(10, 10, 0),
+const initialState: FieldState = {
+  fieldState: [],
 };
 
 export const FieldSlice = createSlice({
@@ -12,12 +12,14 @@ export const FieldSlice = createSlice({
     UpdateFieldState: (state, action) => {
       state.fieldState = action.payload;
     },
-    UpdateCellStatus: (state = initialState, action) => {
-      state.fieldState[action.payload.x][action.payload.y] =
-        action.payload.status;
-    },
   },
 });
 
-export const { UpdateFieldState, UpdateCellStatus } = FieldSlice.actions;
+export const { UpdateFieldState } = FieldSlice.actions;
+
+export const filledFieldSelector = createSelector(
+  (state: { FieldSlice: FieldState }) => state.FieldSlice.fieldState,
+  (fieldState: FilledFieldTypes) => fieldState
+);
+
 export default FieldSlice.reducer;
