@@ -1,25 +1,54 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ControlPanelState } from "../../../types";
+import { fillField } from "../../../utils/helpers";
+import { UpdateFieldState } from "../../Store/slices/FieldSlice";
 import { ControlPanel } from "./Components/ControlPanel/ControlPanel";
 import { Field } from "./Components/Field/Field";
-import { UserPanel } from "./Components/UserPanel/UserPanel";
 import classes from "./Mainscreen.module.css";
-import { UpdateCellStatus } from "../../Store/slices/FieldSlice";
 
 export const Mainscreen: React.FunctionComponent = () => {
+  const { fieldSize, population, speed, isPlaying } = useSelector(
+    (state: { ContolPanelSlice: ControlPanelState }) => state.ContolPanelSlice
+  );
   const dispatch = useDispatch();
-  const loggedInUser = localStorage.getItem("userName");
+  const filledField = fillField(fieldSize.x, fieldSize.y, population);
 
-  // const test = () =>
-  //   dispatch(UpdateCellStatus({ x: 0, y: 0, status: "alive" }));
+  function* nextFrameGenerator(isPlaying: boolean): Generator<number> {
+    while (isPlaying) {
+      yield dispatch({ type: "PLAY", payload: { playing: true } });
+    }
+  }
 
-  // test();
+  const testGenerator = useRef<Generator<number>>();
+  const paused = useRef<boolean>(false);
+
+  useEffect(() => {
+    const fn = () => {
+      if (paused.current) return;
+      testGenerator.current!.next();
+      setTimeout(() => {
+        fn();
+      }, speed);
+    };
+
+    if (isPlaying) {
+      paused.current = false;
+      testGenerator.current = nextFrameGenerator(isPlaying);
+      fn();
+    } else {
+      paused.current = true;
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    dispatch(UpdateFieldState(filledField));
+  }, [fieldSize, population]);
 
   return (
     <div className={classes.formWrapper}>
       <div className={classes.form}>
-        <UserPanel loggedInUser={loggedInUser} />
-        <Field fieldSize={{ x: 50, y: 50 }} initialPopulation={30} />
+        <Field />
         <ControlPanel />
       </div>
     </div>

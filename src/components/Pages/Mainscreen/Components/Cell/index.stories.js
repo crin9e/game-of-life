@@ -8,7 +8,7 @@ export default {
 };
 
 export const CellStoryWithKnobs = () => {
-  const options = ["vacant", "alive", "dead"];
+  const options = ["vacant", "alive"];
   const cellStatus = select("Status", options, "vacant");
 
   useEffect(() => {

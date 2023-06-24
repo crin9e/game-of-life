@@ -1,4 +1,4 @@
-export type Status = "vacant" | "alive" | "dead";
+export type Status = "vacant" | "alive";
 
 export type CellTypes = {
   status: Status;
@@ -6,7 +6,7 @@ export type CellTypes = {
   y: number;
 };
 
-export type FilledFieldTypes = Status[][];
+export type FilledFieldTypes = Status[][] | null;
 
 export type FieldSize = {
   x: number;
@@ -14,13 +14,22 @@ export type FieldSize = {
 };
 
 export type FieldTypes = {
-  fieldSize: {
-    x: number;
-    y: number;
-  };
-  initialPopulation: number;
+  filledField: FilledFieldTypes;
 };
 
 export type SpeedActions = "slowDown" | "resetSpeed" | "speedUp";
 
-export type UserPanelTypes = { loggedInUser: string | null };
+export type ControlPanelState = {
+  fieldSize: FieldSize;
+  population: number;
+  speed: number;
+  isPlaying: boolean;
+};
+
+export type LoginState = {
+  username: string | null;
+};
+
+export type FieldState = {
+  fieldState: FilledFieldTypes | null;
+};

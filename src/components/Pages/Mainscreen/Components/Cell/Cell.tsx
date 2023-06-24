@@ -1,44 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import clsx from "clsx";
 import { CellTypes } from "../../../../../types";
 import styles from "./Cell.module.css";
+import { useDispatch } from "react-redux";
 
 export const Cell: React.FunctionComponent<CellTypes> = ({ status, x, y }) => {
-  const [cellStatus, setCellStatus] = useState(status);
+  const dispatch = useDispatch();
+
   const handleChangeStatus = (event: MouseEvent) => {
     event.preventDefault();
     if (event.type === "mouseover") {
       if (event.buttons == 1) {
-        setCellStatus("alive");
+        dispatch({ type: "PLANT_CELL", payload: { x, y } });
       }
       if (event.buttons == 2) {
-        setCellStatus("dead");
-      }
-      if (event.buttons == 4) {
-        setCellStatus("vacant");
+        dispatch({ type: "KILL_CELL", payload: { x, y } });
       }
     }
     if (event.type === "mousedown") {
       if (event.buttons == 1) {
-        setCellStatus("alive");
+        dispatch({ type: "PLANT_CELL", payload: { x, y } });
       }
       if (event.buttons == 2) {
-        setCellStatus("dead");
-      }
-      if (event.buttons == 4) {
-        setCellStatus("vacant");
+        dispatch({ type: "KILL_CELL", payload: { x, y } });
       }
     }
   };
 
-  useEffect(() => {
-    setCellStatus(status);
-  }, [status]);
-
   return (
     <div
       data-testid={`cell-${x}-${y}`}
-      className={clsx(styles.cell, styles[cellStatus])}
+      className={clsx(styles.cell, styles[status])}
       onMouseOver={handleChangeStatus}
       onMouseDown={handleChangeStatus}
     ></div>

@@ -1,13 +1,19 @@
 import React from "react";
-import { FieldRow } from "./FieldRow";
+import { FieldColumn } from "./FieldColumn";
 import { render, screen } from "@testing-library/react";
 import { describe, expect } from "@jest/globals";
+import { Provider } from "react-redux";
+import { store } from "../../../../Store/store";
 
-describe("FieldRow component", () => {
-  it("should render a field row", () => {
-    render(<FieldRow row={["vacant", "vacant", "vacant"]} rowIndex={2} />);
+describe("FieldColumn component", () => {
+  it("should render a field column", () => {
+    render(
+      <Provider store={store}>
+        <FieldColumn column={["vacant", "vacant", "vacant"]} columnIndex={2} />
+      </Provider>
+    );
 
-    const field = screen.getAllByTestId("row");
+    const field = screen.getAllByTestId("column");
 
     expect(field).toBeDefined();
 
