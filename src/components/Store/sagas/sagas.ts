@@ -46,9 +46,9 @@ export function* killCellSaga(payload: {
   payload: { x: number; y: number };
 }): any {
   try {
-    const fieldState: FilledFieldTypes = yield select(
-      (state) => state.FieldSlice.fieldState
-    );
+    const fieldState: FilledFieldTypes = yield select((state) => {
+      return state.FieldSlice.fieldState;
+    });
     const fieldStateCopy = [...fieldState!];
     const { x, y } = payload.payload;
     fieldStateCopy[x] = [...fieldStateCopy[x]];

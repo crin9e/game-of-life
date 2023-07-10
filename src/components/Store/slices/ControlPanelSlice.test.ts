@@ -75,7 +75,7 @@ test("should change speed", () => {
   expect(reducer(previousState, changeSpeed("up"))).toEqual({
     fieldSize: { x: 50, y: 50 },
     population: 0,
-    speed: 500,
+    speed: 750,
     isPlaying: false,
   });
 });

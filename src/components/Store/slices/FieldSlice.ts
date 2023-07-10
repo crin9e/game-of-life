@@ -1,8 +1,9 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { FieldState, FilledFieldTypes } from "../../../types";
+import { fillField } from "../../../utils/helpers";
 
 const initialState: FieldState = {
-  fieldState: [],
+  fieldState: fillField(50, 50, 0),
 };
 
 export const FieldSlice = createSlice({

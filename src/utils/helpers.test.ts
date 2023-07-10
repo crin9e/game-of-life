@@ -1,5 +1,5 @@
 import { describe, expect } from "@jest/globals";
-import { shuffleArray, fillField } from "./helpers";
+import { shuffleArray, fillField, checkNeighbours } from "./helpers";
 
 describe("Fill field", () => {
   it("should shuffle an array randomly", () => {
@@ -40,5 +40,22 @@ describe("Fill field", () => {
     expect(occurrences1["alive"]).toEqual(75);
     expect(occurrences2["alive"]).toEqual(75);
     expect(JSON.stringify(array1)).not.toEqual(JSON.stringify(array2));
+  });
+});
+
+describe("check neighbours", () => {
+  it("should have 0 neighbours", () => {
+    const emptyField = fillField(5, 5, 0);
+    expect(checkNeighbours(emptyField, 2, 2)).toEqual(0);
+  });
+  it("should have 1 neighbour", () => {
+    const emptyField = fillField(5, 5, 0);
+    emptyField![2][3] = "alive";
+    emptyField![3][3] = "alive";
+    expect(checkNeighbours(emptyField, 2, 3)).toEqual(1);
+  });
+  it("should have 3 neighbours", () => {
+    const emptyField = fillField(2, 2, 100);
+    expect(checkNeighbours(emptyField, 1, 1)).toEqual(3);
   });
 });
