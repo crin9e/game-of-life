@@ -33,12 +33,12 @@ const ContolPanelSlice = createSlice({
       }
       if (action.payload === "up") {
         if (state.speed > 0) {
-          state.speed -= 500;
+          state.speed -= 250;
         }
       }
       if (action.payload === "down") {
         if (state.speed < 2000) {
-          state.speed += 500;
+          state.speed += 250;
         }
       }
     },

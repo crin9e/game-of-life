@@ -3,7 +3,9 @@ import { fillField } from "../../../utils/helpers";
 import reducer, { UpdateFieldState } from "./FieldSlice";
 
 test("should return the initial state", () => {
-  expect(reducer(undefined, { type: undefined })).toEqual({ fieldState: [] });
+  expect(reducer(undefined, { type: undefined })).toEqual({
+    fieldState: fillField(50, 50, 0),
+  });
 });
 
 test("should update whole field", () => {

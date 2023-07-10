@@ -109,6 +109,9 @@ export const ControlPanel: React.FC = () => {
           onClick={() => {
             dispatch(toggleIsPlaying(true));
           }}
+          className={clsx({
+            [styles.selected]: controlPanelState.isPlaying,
+          })}
         >
           ⏵
         </button>
