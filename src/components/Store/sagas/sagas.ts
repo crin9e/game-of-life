@@ -19,15 +19,15 @@ export function* processNextFrameSaga(): any {
         const neighbours = checkNeighbours(array, x, y);
         if (cell === "alive") {
           if (neighbours < 2) {
-            cellsToUpdate.push({ x, y, status: "vacant" });
+            cellsToUpdate.push({ x, y, status: Status.vacant });
           }
           if (neighbours > 3) {
-            cellsToUpdate.push({ x, y, status: "vacant" });
+            cellsToUpdate.push({ x, y, status: Status.vacant });
           }
         }
         if (cell === "vacant") {
           if (neighbours === 3) {
-            cellsToUpdate.push({ x, y, status: "alive" });
+            cellsToUpdate.push({ x, y, status: Status.alive });
           }
         }
       })
@@ -52,7 +52,7 @@ export function* killCellSaga(payload: {
     const fieldStateCopy = [...fieldState!];
     const { x, y } = payload.payload;
     fieldStateCopy[x] = [...fieldStateCopy[x]];
-    fieldStateCopy[x][y] = "vacant";
+    fieldStateCopy[x][y] = Status.vacant;
     yield put(UpdateFieldState(fieldStateCopy));
   } catch (e) {
     console.log({ e });
@@ -69,7 +69,7 @@ export function* plantCellSaga(payload: {
     const fieldStateCopy = [...fieldState!];
     const { x, y } = payload.payload;
     fieldStateCopy[x] = [...fieldStateCopy[x]];
-    fieldStateCopy[x][y] = "alive";
+    fieldStateCopy[x][y] = Status.alive;
     yield put(UpdateFieldState(fieldStateCopy));
   } catch (e) {
     console.log({ e });

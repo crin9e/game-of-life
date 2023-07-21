@@ -1,4 +1,4 @@
-import { FilledFieldTypes } from "../types";
+import { FilledFieldTypes, Status } from "../types";
 
 export const fillField = (
   x: number,
@@ -7,17 +7,17 @@ export const fillField = (
 ): FilledFieldTypes => {
   const populatedCells = Math.floor((x * y * initialPopulation) / 100);
   const vacantArray = Array.from("y".repeat(x * y - populatedCells)).map(
-    (element) => element.replace("y", "vacant")
+    (element) => element.replace("y", Status.vacant)
   );
   const populatedArray = Array.from("y".repeat(populatedCells)).map((element) =>
-    element.replace("y", "alive")
+    element.replace("y", Status.alive)
   );
   const unShuffledArray = vacantArray.concat(populatedArray);
   const shuffledArray = shuffleArray(unShuffledArray);
   const filledField = [];
   while (shuffledArray.length) filledField.push(shuffledArray.splice(0, y));
 
-  return filledField;
+  return filledField as FilledFieldTypes;
 };
 
 export const shuffleArray = (array: string[]): string[] => {
