@@ -1,4 +1,7 @@
-export type Status = "vacant" | "alive";
+export enum Status {
+  vacant = "vacant",
+  alive = "alive",
+}
 
 export type CellTypes = {
   status: Status;

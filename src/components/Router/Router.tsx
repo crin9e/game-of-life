@@ -26,7 +26,7 @@ export const Router: React.FunctionComponent = () => {
             </CheckForLogin>
           }
         />
-        <Route path="*" element={<Navigate to="notfound" />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </>
   );

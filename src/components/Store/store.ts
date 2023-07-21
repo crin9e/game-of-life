@@ -9,7 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 
 const preloadedState = localStorage.getItem("reduxState")
-  ? JSON.parse(localStorage.getItem("reduxState"))
+  ? JSON.parse(localStorage.getItem("reduxState")!)
   : {};
 
 export const store = configureStore({

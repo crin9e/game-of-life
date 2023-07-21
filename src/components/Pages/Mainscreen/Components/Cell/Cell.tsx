@@ -7,7 +7,9 @@ import { useDispatch } from "react-redux";
 export const Cell: React.FunctionComponent<CellTypes> = ({ status, x, y }) => {
   const dispatch = useDispatch();
 
-  const handleChangeStatus = (event: MouseEvent) => {
+  const handleChangeStatus: React.MouseEventHandler<HTMLDivElement> = (
+    event
+  ) => {
     event.preventDefault();
     if (event.type === "mouseover") {
       if (event.buttons == 1) {
